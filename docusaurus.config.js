@@ -1,15 +1,20 @@
 const lightCodeTheme = require('prism-react-renderer/themes/github');
 const darkCodeTheme = require('prism-react-renderer/themes/dracula');
 
+require('dotenv').config();
+
 /** @type {import('@docusaurus/types').Config} */
 const config = {
   title: 'Notebook',
   tagline: 'one notebook for everything.',
-  url: 'https://your-docusaurus-test-site.com',
+  url: 'https://CareyToboo.github.io',
   baseUrl: '/',
-  onBrokenLinks: 'throw',
-  onBrokenMarkdownLinks: 'warn',
   favicon: 'images/logo-xs.ico',
+
+  noIndex: true,
+  onBrokenLinks: 'ignore',
+  onBrokenMarkdownLinks: 'warn',
+  trailingSlash: false,
 
   // GitHub pages deployment config.
   // If you aren't using GitHub pages, you don't need these.
