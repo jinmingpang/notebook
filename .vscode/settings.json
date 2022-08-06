@@ -1,0 +1,21 @@
+{
+  "editor.formatOnSave": true,
+  "editor.tabSize": 2,
+  "outline.showStructs": false,
+  "editor.codeActionsOnSave": {
+    "source.fixAll": true
+  },
+  "editor.snippetSuggestions": "top",
+  "[markdown]": {
+    "editor.quickSuggestions": {
+      "comments": "on",
+      "strings": "on",
+      "other": "on"
+    }
+  },
+  "markdownlint.config": {
+    "default": true,
+    "MD041": false,
+    "MD007": false
+  }
+}

@@ -1,0 +1,73 @@
+[事件参考](https://developer.mozilla.org/zh-CN/docs/Web/Events)
+
+## 事件对象
+## 事件类型
+- onabort
+- onautocomplete
+- onautocompleteerror
+- oncancel
+- oncanplay
+- oncanplaythrough
+- onclose
+- oncontextmenu
+- oncuechange
+- onreset
+- onresize
+- onscroll
+- onseeked
+- onseeking
+- onselect
+- onshow
+- onsort
+- onstalled
+- onsubmit
+- onsuspend
+- ontimeupdate
+- onvolumechange
+- onwaiting
+- ondurationchange
+- onemptied
+- onended
+- onerror
+- onfocus
+- onblur
+- oninvalid
+- onload
+- onloadeddata
+- onloadedmetadata
+- onloadstart
+- 表单
+- ontoggle
+- onchange
+- onclick
+- ondblclick
+- 拖拽
+- ondrag
+- ondragend
+- ondragenter
+- ondragexit
+- ondragleave
+- ondragover
+- ondragstart
+- ondrop
+- 键盘
+    - oninput
+    - onkeydown
+    - onkeypress
+    - onkeyup
+- 鼠标
+- onmousedown
+- onmouseenter
+- onmouseleave
+- onmousemove
+- onmouseout
+- onmouseover
+- onmouseup
+- onmousewheel
+- 多媒体
+- onpause
+- onplay
+- onplaying
+- onprogress
+- onratechange
+
