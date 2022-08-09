@@ -7,11 +7,10 @@ require('dotenv').config();
 const config = {
   title: 'Notebook',
   tagline: 'one notebook for everything.',
-  url: 'https://CareyToboo.github.io',
-  baseUrl: '/',
+  url: 'https://careyToboo.github.io',
+  baseUrl: '/notebook/',
   favicon: 'images/logo-xs.ico',
 
-  noIndex: true,
   onBrokenLinks: 'ignore',
   onBrokenMarkdownLinks: 'warn',
   trailingSlash: false,
