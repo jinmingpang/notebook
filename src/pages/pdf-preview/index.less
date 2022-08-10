@@ -1,0 +1,32 @@
+.pdf {
+  &-wrap {
+    min-height: 100vh;
+    background-color: rgb(82, 86, 89);
+    font-family: Segoe UI, Tahoma, sans-serif;
+  }
+}
+
+.react-pdf {
+  &__Document {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+
+  &__Page {
+    max-width: calc(~'100% - 2em');
+    box-shadow: 0 0 8px rgba(0, 0, 0, 0.5);
+    margin: 1em;
+
+    &__canvas {
+      margin: auto;
+      max-width: 100%;
+      height: auto !important;
+    }
+  }
+
+  &__message {
+    padding: 20px;
+    color: white;
+  }
+}
