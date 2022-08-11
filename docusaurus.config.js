@@ -1,6 +1,5 @@
 const lightCodeTheme = require('prism-react-renderer/themes/github');
 const darkCodeTheme = require('prism-react-renderer/themes/dracula');
-const reactPdfPlugin = require('./plugins/react-pdf');
 
 require('dotenv').config();
 
@@ -40,7 +39,7 @@ const config = {
     ],
   ],
 
-  plugins: [reactPdfPlugin, 'docusaurus-plugin-less'],
+  plugins: ['docusaurus-plugin-less'],
 
   themeConfig: {
     colorMode: {
