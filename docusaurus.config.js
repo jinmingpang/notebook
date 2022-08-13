@@ -41,21 +41,27 @@ const config = {
 
   plugins: ['docusaurus-plugin-less'],
 
+  // scripts: ['/notebook/styles/tailwind.css'],
+
   themeConfig: {
+    prism: {
+      theme: lightCodeTheme,
+      darkTheme: darkCodeTheme,
+    },
     colorMode: {
       defaultMode: 'light',
       disableSwitch: false,
       respectPrefersColorScheme: true,
     },
-    mermaid: {
-      theme: {
-        light: 'dark',
-        dark: 'forest',
-      },
-      config: {
-        // Mermaid config
-      },
-    },
+    // mermaid: {
+    //   theme: {
+    //     light: 'dark',
+    //     dark: 'forest',
+    //   },
+    //   config: {
+    //     // Mermaid config
+    //   },
+    // },
     navbar: {
       title: 'Notebook',
       logo: {
@@ -75,10 +81,6 @@ const config = {
     footer: {
       style: 'dark',
       copyright: `Copyright © ${new Date().getFullYear()} CareyToboo, Inc.`,
-    },
-    prism: {
-      theme: lightCodeTheme,
-      darkTheme: darkCodeTheme,
     },
   },
 };

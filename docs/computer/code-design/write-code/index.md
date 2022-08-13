@@ -15,7 +15,7 @@
   - [动态算法演示](https://algorithm-visualizer.org/backtracking/hamiltonean-cycles)
 - 大佬总结
   - [系统学习算法](https://www.zhihu.com/question/20588261/answer/926157817)
-  - [labuladong算法](https://labuladong.gitee.io/algo/)
+  - [labuladong算法](https:// .gitee.io/algo/)
   - [小浩算法](https://www.geekxh.com/0.0.%E5%AD%A6%E4%B9%A0%E9%A1%BB%E7%9F%A5/01.html)
   - [吴师兄算法](https://blog.algomooc.com/)
 

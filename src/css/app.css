@@ -28,3 +28,91 @@
   --ifm-color-primary-lightest: #4fddbf;
   --docusaurus-highlighted-code-line-bg: rgba(0, 0, 0, 0.3);
 }
+
+.inline-block {
+  display: inline-block;
+}
+
+.flex {
+  display: flex;
+}
+
+.align-middle {
+  vertical-align: middle;
+}
+
+.align-bottom {
+  vertical-align: bottom;
+}
+
+.align-top {
+  vertical-align: top;
+}
+
+
+.n {
+  font-style: normal;
+}
+
+.b {
+  font-weight: bolder;
+}
+
+.c-w {
+  color: #fff;
+}
+
+.c-1 {
+  color: rgb(220 38 38);
+}
+
+.c-2 {
+  color: rgb(217 119 6);
+}
+
+.c-3 {
+  color: rgb(101 163 13);
+}
+
+.c-4 {
+  color: rgb(5 150 105);
+}
+
+.c-5 {
+  color: rgb(37 99 235);
+}
+
+.c-6 {
+  color: rgb(147 51 234);
+}
+
+
+.bg-1 {
+  color: #fff;
+  background-color: rgb(220 38 38);
+}
+
+.bg-2 {
+  color: #fff;
+  background-color: rgb(217 119 6);
+}
+
+.bg-3 {
+  color: #fff;
+  background-color: rgb(101 163 13);
+}
+
+.bg-4 {
+  color: #fff;
+  background-color: rgb(5 150 105);
+}
+
+.bg-5 {
+  color: #fff;
+  background-color: rgb(37 99 235);
+}
+
+.bg-6 {
+  color: #fff;
+  background-color: rgb(147 51 234);
+}
