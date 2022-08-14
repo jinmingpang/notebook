@@ -36,27 +36,27 @@ var merge = function (nums1, m, nums2, n) {
    * 重点是：下标值的 变化
    *
    */
-  var insertPos = m + n - 1
-  m -= 1
-  n -= 1
+  var insertPos = m + n - 1;
+  m -= 1;
+  n -= 1;
   while (n >= 0) {
-    var maxN1 = nums1[m]
-    var maxN2 = nums2[n]
+    var maxN1 = nums1[m];
+    var maxN2 = nums2[n];
 
     if (maxN1 > maxN2) {
-      nums1[insertPos] = maxN1
-      m -= 1
+      nums1[insertPos] = maxN1;
+      m -= 1;
     } else {
-      nums1[insertPos] = maxN2
-      n -= 1
+      nums1[insertPos] = maxN2;
+      n -= 1;
     }
-    insertPos -= 1
+    insertPos -= 1;
   }
-}
+};
 // @lc code=end
 
 // debug
-// merge([1, 2, 3], 3, [1, 2, 3], 3)
+// merge([4, 5, 6], 3, [1, 3], 2);
 
 /**
  * 

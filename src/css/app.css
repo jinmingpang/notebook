@@ -89,11 +89,13 @@
 
 .bg-1 {
   color: #fff;
+  padding: 2px;
   background-color: rgb(220 38 38);
 }
 
 .bg-2 {
   color: #fff;
+  padding: 2px;
   background-color: rgb(217 119 6);
 }
 
@@ -104,15 +106,23 @@
 
 .bg-4 {
   color: #fff;
+  padding: 2px;
   background-color: rgb(5 150 105);
 }
 
 .bg-5 {
   color: #fff;
+  padding: 2px;
   background-color: rgb(37 99 235);
 }
 
 .bg-6 {
   color: #fff;
+  padding: 2px;
   background-color: rgb(147 51 234);
+}
+
+.markmap-container>svg {
+  width: 100%;
+  min-height: 300px;
 }

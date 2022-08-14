@@ -1,7 +1,7 @@
 {
   "extends": "@tsconfig/docusaurus/tsconfig.json",
   "compilerOptions": {
-    "strict": true,
+    "strict": false,
     "declaration": true,
     "skipLibCheck": true,
     "esModuleInterop": true,
@@ -10,5 +10,6 @@
     "paths": {
       "@/*": ["src/*"]
     }
-  }
+  },
+  "exclude": ["static"]
 }

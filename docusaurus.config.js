@@ -1,5 +1,7 @@
 const lightCodeTheme = require('prism-react-renderer/themes/github');
 const darkCodeTheme = require('prism-react-renderer/themes/dracula');
+const math = require('remark-math');
+const katex = require('rehype-katex');
 
 require('dotenv').config();
 
@@ -16,33 +18,55 @@ const config = {
   trailingSlash: false,
 
   // GitHub pages deployment config.
-  // If you aren't using GitHub pages, you don't need these.
   organizationName: 'CareyToboo', // Usually your GitHub org/user name.
   projectName: 'notebook', // Usually your repo name.
   deploymentBranch: 'gh-pages',
 
-  presets: [
+  plugins: [
+    'docusaurus-plugin-less',
+    ['@docusaurus/plugin-content-pages', {}],
     [
-      'classic',
+      '@docusaurus/theme-classic',
       {
-        docs: {
-          path: 'docs',
-          sidebarPath: 'sidebars.js',
-        },
-        blog: {
-          showReadingTime: true,
-        },
-        theme: {
-          customCss: require.resolve('./src/css/app.css'),
-        },
+        customCss: require.resolve('./src/css/app.css'),
+      },
+    ],
+    [
+      '@docusaurus/plugin-content-docs',
+      {
+        path: 'docs',
+        sidebarPath: 'sidebars.js',
+        remarkPlugins: [math],
+        rehypePlugins: [katex],
       },
     ],
   ],
 
-  plugins: ['docusaurus-plugin-less'],
+  scripts: [],
+  stylesheets: [
+    {
+      href: 'https://cdn.jsdelivr.net/npm/katex@0.13.24/dist/katex.min.css',
+      type: 'text/css',
+      integrity:
+        'sha384-odtC+0UGzzFL/6PNoE8rX/SPcQDXBJ+uRepguP4QkPCm2LBxH3FA3y+fKSiJ+AmM',
+      crossorigin: 'anonymous',
+    },
+  ],
 
-  // scripts: ['/notebook/styles/tailwind.css'],
-
+  themes: [
+    '@docusaurus/theme-live-codeblock',
+    [
+      // https://github.com/easyops-cn/docusaurus-search-local
+      '@easyops-cn/docusaurus-search-local',
+      {
+        hashed: true,
+        language: ['zh'],
+        docsRouteBasePath: '/notebook',
+        highlightSearchTermsOnTargetPage: true,
+        explicitSearchResultPath: true,
+      },
+    ],
+  ],
   themeConfig: {
     prism: {
       theme: lightCodeTheme,
@@ -53,15 +77,9 @@ const config = {
       disableSwitch: false,
       respectPrefersColorScheme: true,
     },
-    // mermaid: {
-    //   theme: {
-    //     light: 'dark',
-    //     dark: 'forest',
-    //   },
-    //   config: {
-    //     // Mermaid config
-    //   },
-    // },
+    liveCodeBlock: {
+      playgroundPosition: 'bottom',
+    },
     navbar: {
       title: 'Notebook',
       logo: {

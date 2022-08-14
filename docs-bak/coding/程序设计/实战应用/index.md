@@ -13,7 +13,7 @@ keywords:
 
 # 刷题规划
 
-## 资源地址
+## 参考资料链接
 
 - 基础知识学习
   - [数据结构视频](https://www.icourse163.org/course/ZJU-93001?outVendor=zw_mooc_pclszykctj_)
