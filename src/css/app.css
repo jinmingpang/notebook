@@ -49,7 +49,6 @@
   vertical-align: top;
 }
 
-
 .n {
   font-style: normal;
 }
@@ -57,6 +56,7 @@
 .b {
   font-weight: bolder;
 }
+
 
 .c-w {
   color: #fff;
@@ -120,9 +120,4 @@
   color: #fff;
   padding: 2px;
   background-color: rgb(147 51 234);
-}
-
-.markmap-container>svg {
-  width: 100%;
-  min-height: 300px;
 }
