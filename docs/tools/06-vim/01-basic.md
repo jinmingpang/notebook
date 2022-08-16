@@ -173,10 +173,10 @@
 
 ## surround 包裹
 
-- y s <motion> <desired> 添加包裹
-- d s <existing> 删除包裹
-- c s <existing> <desired> 改变包裹
-- S <desired> 在 visual 模式中选择包裹
+- `y s <motion> <desired>` 添加包裹
+- `d s <existing>` 删除包裹
+- `c s <existing> <desired>` 改变包裹
+- `S <desired>` 在 visual 模式中选择包裹
 
 ## multi-cursor 多光标模式
 

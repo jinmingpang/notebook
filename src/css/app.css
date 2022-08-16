@@ -15,6 +15,13 @@
   --ifm-color-primary-lightest: #3cad6e;
   --ifm-code-font-size: 95%;
   --docusaurus-highlighted-code-line-bg: rgba(0, 0, 0, 0.1);
+
+  --c1: rgb(220 38 38);
+  --c2: rgb(217 119 6);
+  --c3: rgb(101 163 13);
+  --c4: rgb(5 150 105);
+  --c5: rgb(37 99 235);
+  --c6: rgb(147 51 234);
 }
 
 /* For readability concerns, you should choose a lighter palette in dark mode. */
@@ -28,6 +35,7 @@
   --ifm-color-primary-lightest: #4fddbf;
   --docusaurus-highlighted-code-line-bg: rgba(0, 0, 0, 0.3);
 }
+
 
 .inline-block {
   display: inline-block;
@@ -63,61 +71,125 @@
 }
 
 .c-1 {
-  color: rgb(220 38 38);
+  color: var(--c1);
 }
 
 .c-2 {
-  color: rgb(217 119 6);
+  color: var(--c2);
 }
 
 .c-3 {
-  color: rgb(101 163 13);
+  color: var(--c3);
 }
 
 .c-4 {
-  color: rgb(5 150 105);
+  color: var(--c4);
 }
 
 .c-5 {
-  color: rgb(37 99 235);
+  color: var(--c5);
 }
 
 .c-6 {
-  color: rgb(147 51 234);
+  color: var(--c6);
 }
 
 
 .bg-1 {
   color: #fff;
   padding: 2px;
-  background-color: rgb(220 38 38);
+  background-color: var(--c1);
 }
 
 .bg-2 {
   color: #fff;
   padding: 2px;
-  background-color: rgb(217 119 6);
+  background-color: var(--c2);
 }
 
 .bg-3 {
   color: #fff;
-  background-color: rgb(101 163 13);
+  padding: 2px;
+  background-color: var(--c3);
 }
 
 .bg-4 {
   color: #fff;
   padding: 2px;
-  background-color: rgb(5 150 105);
+  background-color: var(--c4);
 }
 
 .bg-5 {
   color: #fff;
   padding: 2px;
-  background-color: rgb(37 99 235);
+  background-color: var(--c5);
 }
 
 .bg-6 {
   color: #fff;
   padding: 2px;
-  background-color: rgb(147 51 234);
+  background-color: var(--c6);
+}
+
+.l {
+  text-decoration-thickness: 2px;
+  text-decoration-line: underline;
+  text-decoration-style: solid;
+}
+
+.l-over {
+  text-decoration-line: overline;
+}
+
+.l-under {
+  text-decoration-line: underline;
+}
+
+.l-through {
+  text-decoration-line: line-through;
+}
+
+.l-solid {
+  text-decoration-style: solid;
+}
+
+.l-wavy {
+  text-decoration-style: wavy;
+}
+
+.l-dashed {
+  text-decoration-style: dashed;
+}
+
+.l-double {
+  text-decoration-style: double;
+}
+
+.l-dotted {
+  text-decoration-style: dotted;
+}
+
+
+.l-1 {
+  text-decoration-color: var(--c1);
+}
+
+.l-2 {
+  text-decoration-color: var(--c2);
+}
+
+.l-3 {
+  text-decoration-color: var(--c3);
+}
+
+.l-4 {
+  text-decoration-color: var(--c4);
+}
+
+.l-5 {
+  text-decoration-color: var(--c5);
+}
+
+.l-6 {
+  text-decoration-color: var(--c6);
 }

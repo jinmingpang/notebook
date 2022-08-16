@@ -1,8 +1,3 @@
----
-group:
-  order: 1
----
-
 # 流程图 Flow chart
 
 - [文档地址](https://mermaid-js.github.io/mermaid/#/flowchart)

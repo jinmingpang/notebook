@@ -93,7 +93,12 @@ const config = {
           docId: 'computer/intro',
           label: '计算机技术',
         },
-        // { to: '/blog', label: 'Blog', position: 'left' },
+        {
+          type: 'doc',
+          position: 'left',
+          docId: 'tools/intro',
+          label: '常用工具',
+        },
       ],
     },
     footer: {
