@@ -18,5 +18,8 @@
     "MD041": false,
     "MD033": false,
     "MD007": false
-  }
+  },
+  "cSpell.ignoreWords": [
+    "malloc"
+  ]
 }

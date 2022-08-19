@@ -96,6 +96,12 @@ const config = {
         {
           type: 'doc',
           position: 'left',
+          docId: 'development/intro',
+          label: '程序开发',
+        },
+        {
+          type: 'doc',
+          position: 'left',
           docId: 'tools/intro',
           label: '常用工具',
         },
