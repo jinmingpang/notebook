@@ -193,3 +193,11 @@
 .l-6 {
   text-decoration-color: var(--c6);
 }
+
+.table-of-contents__link t[c1] {
+  color: var(--c1);
+}
+
+.table-of-contents__link--active t[c1] {
+  color: inherit;
+}

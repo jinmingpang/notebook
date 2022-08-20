@@ -1,6 +1,6 @@
 # 线性表-顺序存储
 
-线性表的使用[顺序存储](/notebook/docs/computer/code-design/data-structure/data-basic#顺序存储结构)实现又叫<t c1>顺序表</t>。
+线性表的使用[顺序存储](/notebook/docs/computer/code-design/data-structure/data-basic#顺序存储结构)实现又叫<t c1>顺序表</t>。本节的代码内容是非常简单的，除了掌握代码实现以外，还需要了解C语言指针，内存分配与释放，以及内存如何扩容等知识。
 
 ## 参考资料链接
 
@@ -9,7 +9,7 @@
 - [C语言 malloc函数与指针](https://zhuanlan.zhihu.com/p/197918331)
 - [C语言 完整实现顺序表 0201_SqList/main.c](https://60f2cac42d-share.lightly.teamcode.com)
 
-## 注意点
+## 知识点
 
 - 数据元素<t bg1>逻辑相邻物理存储也相邻</t>，使用<t c2>元素在列表中的下标</t>表示逻辑相邻关系。
 ![5-1](./images/5-1.png)
@@ -21,7 +21,7 @@
 ```txt
   已知：
 
-    单个数据元素占用空间：   c = sizeof(ElementType)
+    单个数据元素占用空间：   c = sizeof(ElemType)
     顺序表首元素内存首地址为：LOC(a1)
   
   求：第i个元素，ai的内存首地址是多少？
@@ -29,7 +29,7 @@
     LOC(ai) = LOC(a1) + (i-1) * c
 ```
 
-![5-2](./images/5-2.png)
+![5-2](./images/5-5.webp)
 
 ## [线性表ADT](/notebook/docs/computer/code-design/data-structure/linear-list#线性表抽象数据类型adt)使用C语言实现
 
@@ -39,7 +39,7 @@
 #define TRUE        1   // 真/是
 #define FALSE       0   // 假/否
 #define OK          1   // 通过/成功
-#define ERROR       0   // 错误/失败
+#define ERROR       -3  // 错误/失败
 
 //系统中已有此状态码定义，要防止冲突
 #ifndef OVERFLOW
@@ -89,7 +89,7 @@ Status InitList(SqList *L) {
   // malloc 分配指定容量的内存，如果分配失败 返回 NULL
   (*L).elem = (ElemType*) malloc(LIST_INIT_SIZE * sizeof(ElemType));
 
-  if ((*L).elem === NULL) {
+  if ((*L).elem == NULL) {
     // 如果分配失败 直接退出，并返回对应错误码
     exit(OVERFLOW);
   }
@@ -137,7 +137,7 @@ Status DestroyList(&L) {
 
 - 要注意<t b l l2>清空</t>与<t b l l2>销毁</t>的区别
   - 清空: 只是<t l l2>将顺序表的长度设为0</t>，该顺序表任然可以继续使用。在表中继续添加元素时，会覆盖原有值。
-  - 销毁: 释放顺序表内存空间，不再使用。
+  - 销毁: 释放顺序表内存空间，不再使用。如果需要再次使用，需要重新初始化。
 
 ```c
 /**
@@ -146,7 +146,7 @@ Status DestroyList(&L) {
  */
 Status ClearList(&L) {
   // 确认 顺序表存在
-  if (L == NULL && (*L).elem == NULL) {
+  if (L == NULL || (*L).elem == NULL) {
     return ERROR;
   }
   // 置为空表
@@ -177,7 +177,7 @@ Status ListEmpty(L) {
 }
 ```
 
-### 获取元素长度
+### 获取顺序表长度
 
 ```c
 /**
@@ -195,6 +195,7 @@ int ListLength(L) {
 
 ### 获取某位置元素的值
 
+- 时间复杂度为 $O(1)$
 - 注意： <t l l2>参数 i 定义是<t c2>位置</t></t>。 所以i的取值区间为 $1 <= i <= L.length$
 
 ```c
@@ -203,7 +204,7 @@ int ListLength(L) {
  */
 Status GetElem(L, i, ElementType* e) {
   // 确认 i 的值有效
-  if (i < 1 || i > L.length) {
+  if (i < 1 || i > L.length + 1) {
     return ERROR;
   }
   // 确认 L 存在
@@ -219,11 +220,33 @@ Status GetElem(L, i, ElementType* e) {
 
 ### 获取某元素的位置
 
+- 第二个参数e,是 `Compare` 函数的第二个形参。
+- 第三个参数`Compare`是一个函数地址，用于比较元素是否相等
+- 时间复杂度为 $O(n)$
+- 注意：<t l l2>返回的值为<t c2>位置号</t></t>,所以区间为 $i<position<L.length$
+
 ```c
 /**
  * 初始条件: 线性表L已存在，compare()是数据元素判定函数。
  * 操作结果: 返回L中第1个与e满足关系 compare() 的数据元素的位序。若这样的数据元素不存在，则返回值为0。
  */
+
+int LocateElem(SqList L, ElemType e, Status(Compare)(ElemType, ElemType)) {
+
+  // 确保 L 存在
+  if (L.elem == NULL) {
+    return ERROR;
+  }
+
+  // 循环遍历比较 顺序表中元素，与指定元素 是否相等，
+  for (int i = 0; i<L.length; i++) {
+    if (Compare(L.elem[i], e)) {
+      return i+1;
+    }
+  }
+
+  return 0;
+}
 ```
 
 ### 获取某元素前驱元素
@@ -233,6 +256,23 @@ Status GetElem(L, i, ElementType* e) {
  * 初始条件: 线性表L已存在。
  * 操作结果: 若 cur.e 是L的数据元素，且不是第一个，则用 pre.e 返回它的前驱，否则操作失败，pre.e 无定义。
  */ 
+
+Status PriorElem(SqList L, ElemType cur_e, ElemType* pre_e) {
+  // 确保L， 并最少有2个元素
+  if (L.elem == NULL || L.length < 2) {
+    return ERROR;
+  }
+
+  // 循环遍历比较 顺序表中元素，与指定元素 是否相等，
+  for (int i = 1; i<L.length; i++) {
+    if (L.elem[i] == e) {
+      *pre_e = L.elem[i-1]
+      return OK;
+    }
+  }
+
+  return ERROR;
+}
 ```
 
 ### 获取某元素后继元素
@@ -242,33 +282,268 @@ Status GetElem(L, i, ElementType* e) {
  * 初始条件: 线性表L已存在。
  * 操作结果: 若 cur.e 是L的数据元素，且不是最后一个，则用 next.e 返回它的后继，否则操作失败，next.e 无定义。
  */
+
+ Status NextElem(SqList L, ElemType cur_e, ElemType* pre_e) {
+  // 确保L， 并最少有2个元素
+  if (L.elem == NULL || L.length < 2) {
+    return ERROR;
+  }
+
+  // 循环遍历比较 顺序表中元素，与指定元素 是否相等，
+  for (int i = 0; i<L.length-1; i++) {
+    if (L.elem[i] == e) {
+      *pre_e = L.elem[i+1]
+      return OK;
+    }
+  }
+
+  return ERROR;
+}
 ```
 
-### 某位置插入元素
+### 重点：<t c1>在某位置插入元素</t>
+
+<img src={require("./images/5-3.webp").default} alt="5-3" width="600" />
+
+- 插入时是<t bg1>从列表最后一个元素开始</t>，逐步往后移一个位置。
+- 循环的终止条件是：<t c1>i = insertPos - 1;</t>，<t c2>一直要移动到插入位置的前一个</t>。
+- <t c1>空出插入位置</t>，放入需要插入的新元素。
+- 时间复杂度为 $O(n)$
+
+```c
+// 核心代码
+// insetPost插入位置，newNode 插入元素
+for (int i = L.length - 1; i >= insertPos - 1; i--) {
+  L.list[i+1] = L.list[i];
+}
+L.list[insertPos - 1] = newNode;
+```
+
+- 插入元素时，注意<t c2>额外处理数据溢出逻辑</t>
+
+![5-4](./images/5-4.webp)
+
+- 完整代码如下，[可在线查看代码并运行](https://onecompiler.com/c/3ydhxzw6t)
+- 注意： <t l l2>参数 i 定义是<t c2>位置</t></t>。 所以i的取值区间为 $1 <= i <= L.length$
 
 ```c
 /**
  * 初始条件: 线性表L已存在，1 < i < ListLength(L) + 1
  * 操作结果: 在L中第i个位置之前插人新的数据元素eL的长度加1
  */
+
+Status ListInsert(SqList* L, int i, ElemType e) {
+  // 确保L存在
+  if (L == NULL || (*L).elem == NULL) {
+    return ERROR;
+  }
+
+  // 确保 位置参数i，的取值区间
+  if (i<1 || i>(*L).length+1) {
+    return NULL;
+  }
+
+  // 处理 内存溢出 逻辑
+  ElemType* newbase;
+  if ((*L).length == (*L).listsize) {
+    newbase = (ElemType*) realloc((*L).elem, ((*L).listsize + LIST_INCREMENT) * sizeof(ElemType));
+    if (newbase == NULL) {
+      exit(OVERFLOW);
+    }
+
+    (*L).elem = newbase;
+    (*L).listsize = (*L).listsize + LIST_INCREMENT;
+  }
+
+  /*
+    // 方案1：使用指针方案
+
+    ElemType* q = &(*L).elem[i-1]; // q为插入位置
+    ElemType* p;
+    for (p = &(*L).elem[(*L).length - 1]; p >= q; p--) {
+      *(p+1) = *p;
+    }
+    *q = e;
+  */
+
+  // 方案2：使用数组方案
+  for (int j = (*L).length - 1; j >= i - 1; j--) {
+    (*L).elem[j+1] = (*L).elem[j];
+  }
+  (*L).elem[i-1] = e;
+
+  (*L).length += 1;
+
+  return OK;
+}
 ```
 
-### 删除某位置元素
+### 重点：<t c1>删除某位置元素</t>
+
+- 删除元素图示
+
+![5-6](./images/5-6.webp)
+
+- 删除时需要先处理将要移除的元素。移动后会丢失对应数据。
+- 删除时,从移除位置开始，<t bg1>从左到右依次，向前移动</t>
+- 时间复杂度为 $O(n)$
+
+```c
+// 核心代码
+// deletePos 删除位置
+for (int i = deletePos; i < insertPos - 1; i--) {
+  L.list[i-1] = L.list[i];
+}
+```
+
+- 完整代码如下，[可在线查看代码并运行](https://onecompiler.com/c/3ydjcajfg)
+- 注意： <t l l2>参数 i 定义是<t c2>位置</t></t>。 所以i的取值区间为 $1 <= i <= L.length$
 
 ```c
 /**
  * 初始条件:线性表L已存在且非空，1 < i < ListLength(L)
  * 操作结果:删除L的第i个数据元素，并用e返回其值，L的长度减1
  */
+
+Status ListDelete(SqList* L, i, ElemType *e) {
+  // 确保 L 可用
+  if (L == NULL || (*L).elem == NULL) {
+    return ERROR;
+  }
+
+  // 确保 i 在正确的区间
+  if (i<1 || i > (*L).length+1) {
+    return ERROR;
+  }
+
+  // 方案1: 使用指针
+  // ElemType* p = &(*L).elem[i-1]; // 需要删除的 地址
+  // *e = *p; // 将要移除的元素 赋值给 指针e;
+  // for( p+=1; p<= (*L).elem + (*L).length - 1; p++) {
+  // // 先将p指针后移1位， 循环终止是，最后一个地址
+  //   *(p-1) = *p;
+  // }
+
+  // 方案2: 数组
+  *e = (*L).elem[i-1]; // 将要移除的 赋值给 指针e;
+  for(int j = i; j < (*L).length; j++) { // 从 位置i,开始，逐个往前移动
+    (*L).elem[j-1] = (*L).elem[i];
+  }
+
+  (*L).length -= 1;
+
+  return OK;
+}
+
 ```
 
 ### 遍历顺序表
+
+- 参数`visit()` 是传入的遍历操作
 
 ```c
 /**
  * 初始条件: 线性表L已存在。
  * 操作结果: 依次对L的每个数据元素调用函数 visit()。一旦 visit() 失败，则操作失败。
  */
+
+Status ListTraverse(SqList L, void(Visit)(ElemTYpe)) {
+  if (L.elem == NULL) {
+    return ERROR;
+  }
+
+  for (int i; i< L.length; i++) {
+    Visit(L.elem[i]);
+  }
+
+  return OK;
+}
 ```
 
 ## 顺序表实际使用
+
+### 求2个集合的并集
+
+**题目：** 假设利用两个线性表LA和LB分别表示两个集合A和B(即线性表中的数据元素即为集合中的成员)，现要求一个新的集合。
+
+$A = A \cup B$
+
+- 举例
+
+```txt
+输入数据：
+  A = (1,2,3,4);
+  B = (1,4,5,6);
+输出数据：
+  A = (1,2,3,4,5,6);
+```
+
+- 思路
+  - 扩大线性表LA，将存在于线性表LB中而不存在于线性表LA中的数据元素插人到线性表LA中去。
+  - 从线性表LB中依次取得每个数据元素，并依值在线性表LA中进行查访，若不存在，则插人LA。
+  - 需要注意，<t c2>可以使用线性表ADT</t>来描述算法。（不考虑具体实现）
+
+- 伪代码如下： [点击查看可运行代码](https://onecompiler.com/c/3ydjcajfg)
+
+```c
+// 比较函数
+Status Compare(ElemType a, ElemType b) {
+  if (a == b){
+    return TRUE;
+  }
+  return FALSE
+}
+// 合并函数
+Status Union(SqList* A, SqList B) {
+  // 遍历 Lb中每一个元素
+  for (int i = 0; i < B.length; i++) {
+    ElemType b_item;
+    GetElem(B, i+1, &b_item)
+    // 如果 B中元素不在A中存在
+    if (LocateElem(*A, b_item, Compare) == 0) {
+      // 将该元素插入A的末尾
+      ListInsert(A, (*A).length, b_item);
+    }
+  }
+}
+```
+
+### 合并2个有序表
+
+**题目：** 已知线性表LA和LB中的数据元素按值非递减有序排列，现要求将LA和LB归并为一个新的线性表LC，且LC中的数据元素仍按值非递减有序排列。
+
+$C = A \& B$
+
+- 举例
+
+```txt
+输入数据：
+  A = (1,2,3,4);
+  B = (1,4,5,6);
+输出数据：
+  C = (1,1,2,3,4,4,5,6);
+```
+
+- 思路
+  - LC中的数据元素或是LA或LB中元素
+  - 只要先设LC为空表，然后将LA或LB中的元素逐个插人到LC中即可。
+  - 可设两个指针i 和 j分别指向LA 和 LB中某个元素, k为LC的列表的指针。
+  - 比较 $A_i$ 与 $B_j$ 大小
+  - 当前 $$C_k = \begin{cases} A_i, A_i >= B_j, i++ \\ B_j, A_i < B_j, j++ \end{cases}$$
+
+- 伪代码 [查看可运行代码](https://onecompiler.com/c/3ydjcajfg)
+
+```c
+Status MergeList(SqList A, SqList B, SqList* C) {
+  ElemType* i,j,k;
+  i = &A.elem[0];
+  j = &B.elem[0];
+  k = &(*C).elem[0];
+  if (*i >= *j) {
+    *k = *i;
+    i += 1;
+  } else {
+
+  }
+}
+```
