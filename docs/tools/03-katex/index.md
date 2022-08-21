@@ -1,5 +1,9 @@
 # KaTex 公式
 
+## 参考资料链接
+
+- [数学公式和符号](https://zhuanlan.zhihu.com/p/464237097)
+
 ## KaTex 是什么？
 
 ## LaTex 是什么？
