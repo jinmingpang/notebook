@@ -19,7 +19,5 @@
     "MD033": false,
     "MD007": false
   },
-  "cSpell.ignoreWords": [
-    "malloc"
-  ]
+  "cSpell.ignoreWords": ["malloc", "markmap"]
 }

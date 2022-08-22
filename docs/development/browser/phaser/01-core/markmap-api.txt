@@ -1,0 +1,437 @@
+# Phaser
+
+## Actions
+
+## Animations
+
+### Events
+
+## BlendModes
+
+## Cache
+
+### Events
+
+## Cameras
+
+### Controls
+
+### Scene2D
+
+#### Effects
+
+#### Events
+
+## Core
+
+### Events
+
+## Create
+
+### Palettes
+
+## Curves
+
+## DOM
+
+## Data
+
+### Events
+
+## Device
+
+## Display
+
+### Align
+
+#### In
+
+#### To
+
+### Bounds
+
+### Canvas
+
+#### CanvasInterpolation
+
+#### CanvasPool
+
+#### Smoothing
+
+### Color
+
+#### Interpolate
+
+### Masks
+
+## Events
+
+## GameObjects
+
+### Components
+
+#### Alpha
+
+#### AlphaSingle
+
+#### BlendMode
+
+#### ComputedSize
+
+#### Crop
+
+#### Depth
+
+#### Flip
+
+#### GetBounds
+
+#### Mask
+
+#### Origin
+
+#### PathFollower
+
+#### Pipeline
+
+#### ScrollFactor
+
+#### Size
+
+#### Texture
+
+#### TextureCrop
+
+#### Tint
+
+#### Transform
+
+#### Visible
+
+### Events
+
+### Particles
+
+#### Zones
+
+### RetroFont
+
+## Geom
+
+### Intersects
+
+### Mesh
+
+## Input
+
+### Events
+
+### Gamepad
+
+#### Configs
+
+#### Events
+
+### InputPluginCache
+
+### Keyboard
+
+### Keyboard.Events
+
+### Keyboard.KeyCodes
+
+### Mouse
+
+### Touch
+
+## Loader
+
+### Events
+
+### FileTypes
+
+### FileTypesManager
+
+## Math
+
+### Angle
+
+### Distance
+
+### Easing
+
+#### Back
+
+#### Bounce
+
+#### Circular
+
+#### Cubic
+
+#### Elastic
+
+#### Expo
+
+#### Quadratic
+
+#### Quartic
+
+#### Quintic
+
+#### Sine
+
+#### Stepped
+
+### Fuzzy
+
+### Interpolation
+
+### Pow2
+
+### Snap
+
+## Physics
+
+### Arcade
+
+#### Components
+
+##### Acceleration
+
+##### Angular
+
+##### Bounce
+
+##### Debug
+
+##### Drag
+
+##### Enable
+
+##### Friction
+
+##### Gravity
+
+##### Immovable
+
+##### Mass
+
+##### Pushable
+
+##### Size
+
+##### Velocity
+
+#### Events
+
+#### Tilemap
+
+### Matter
+
+#### Components
+
+##### Bounce
+
+##### Collision
+
+##### Force
+
+##### Friction
+
+##### Gravity
+
+##### Mass
+
+##### Sensor
+
+##### SetBody
+
+##### Sleep
+
+##### Static
+
+##### Transform
+
+##### Velocity
+
+#### Events
+
+#### Matter
+
+#### PhysicsEditorParser
+
+#### PhysicsJSONParser
+
+## Plugins
+
+### DefaultPlugins
+
+### PluginCache
+
+## Renderer
+
+### Canvas
+
+### Events
+
+### Snapshot
+
+### WebGL
+
+#### Pipelines
+
+##### Events
+
+#### Utils
+
+## Scale
+
+### Center
+
+### Events
+
+### Orientation
+
+### ScaleModes
+
+### Zoom
+
+## ScaleModes
+
+## Scenes
+
+### Events
+
+### Settings
+
+## Sound
+
+### Events
+
+## Structs
+
+### Events
+
+## Textures
+
+### Events
+
+### FilterMode
+
+### Parsers
+
+## Tilemaps
+
+### Components
+
+### Formats
+
+### Orientation
+
+### Parsers
+
+#### Impact
+
+#### Tiled
+
+## Time
+
+## Tweens
+
+### Builders
+
+### Events
+
+## Types
+
+### Actions
+
+### Animations
+
+### Cameras
+
+#### Controls
+
+#### Scene2D
+
+### Core
+
+### Create
+
+### Curves
+
+### Display
+
+### GameObjects
+
+#### BitmapText
+
+#### Graphics
+
+#### Group
+
+#### Particles
+
+#### PathFollower
+
+#### RenderTexture
+
+#### Sprite
+
+#### Text
+
+#### TileSprite
+
+### Geom
+
+#### Mesh
+
+### Input
+
+#### Gamepad
+
+#### Keyboard
+
+### Loader
+
+#### FileTypes
+
+### Math
+
+### Physics
+
+#### Arcade
+
+#### Matter
+
+### Plugins
+
+### Renderer
+
+#### Snapshot
+
+#### WebGL
+
+### Scenes
+
+### Sound
+
+### Textures
+
+### Tilemaps
+
+### Time
+
+### Tweens
+
+## Utils
+
+### Array
+
+#### Matrix
+
+### Base64
+
+### Objects
+
+### String

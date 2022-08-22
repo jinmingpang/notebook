@@ -6382,6 +6382,13 @@ markdown-escapes@^1.0.0:
   resolved "https://registry.npmmirror.com/markdown-escapes/-/markdown-escapes-1.0.4.tgz#c95415ef451499d7602b91095f3c8e8975f78535"
   integrity sha512-8z4efJYk43E0upd0NbVXwgSTQs6cT3T06etieCMEg7dRbzCbxUCK/GHlX8mhHRDcp+OLlHkPKsvqQTCvsRl2cg==
 
+markmap-common@^0.14.0:
+  version "0.14.0"
+  resolved "https://registry.npmmirror.com/markmap-common/-/markmap-common-0.14.0.tgz#38e597c5d3e64711eab062178dc5c4b701e7d1a7"
+  integrity sha512-XlhwLT6TEraZfWHB9CrjrtkJ1P7BouK7LaLQNalgAdVD3vR7ANXso/Au7ag1gN+M66cxc+ZpekTqm8PTIyXVuQ==
+  dependencies:
+    "@babel/runtime" "^7.12.1"
+
 markmap-lib@^0.14.1:
   version "0.14.1"
   resolved "https://registry.npmmirror.com/markmap-lib/-/markmap-lib-0.14.1.tgz#5a35fbeea49964cde6df49f0275651ab4e9361e3"

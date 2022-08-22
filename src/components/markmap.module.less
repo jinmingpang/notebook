@@ -1,16 +1,82 @@
 .container {
   position: relative;
-  &>svg {
+  & > svg {
     width: 100%;
     min-height: 300px;
   }
+}
+
+.containerBg {
+  background-color: var(--ifm-code-background);
+  border-radius: 8px;
 }
 
 .toolbar {
   position: absolute;
   right: 0.5rem;
   bottom: 0.5rem;
-  :global(.mm-toolbar-brand) {
-    display: none;
+  background-color: var(--ifm-color-emphasis-0);
+  border: 1px solid var(--ifm-color-emphasis-200);
+  &:hover {
+    border: 1px solid var(--ifm-color-emphasis-200);
+  }
+  :global(.mm-toolbar-item:hover) {
+    background-color: var(--ifm-color-emphasis-400);
+  }
+}
+.filterWrap {
+  position: absolute;
+  right: 0.5rem;
+  top: 0.5rem;
+}
+.filterInput {
+  border: 1px solid var(--ifm-color-emphasis-200);
+  background-color: var(--ifm-color-emphasis-0);
+  height: 32px;
+  line-height: 32px;
+  width: 200px;
+  padding: 0 80px 0 10px;
+  font-size: 14px;
+  border-radius: 4px;
+}
+.filterInputClose {
+  position: absolute;
+  width: 20px;
+  height: 20px;
+  top: 6px;
+  right: 4px;
+  opacity: 0.2;
+  cursor: pointer;
+  &:hover {
+    opacity: 0.4;
+  }
+}
+
+.filterStep {
+  position: absolute;
+  top: 6px;
+  right: 24px;
+  font-size: 12px;
+}
+
+.filterStepNum {
+  padding-right: 8px;
+}
+
+.filterStepNav {
+  display: inline-flex;
+  border-radius: 4px;
+  overflow: hidden;
+  i {
+    width: 20px;
+    height: 20px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: var(--ifm-color-emphasis-200);
+    cursor: pointer;
+    &:hover {
+      background-color: var(--ifm-color-emphasis-400);
+    }
   }
 }

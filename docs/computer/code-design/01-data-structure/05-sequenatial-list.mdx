@@ -31,7 +31,15 @@
 
 ![5-2](./images/5-5.webp)
 
-## [线性表ADT](/notebook/docs/computer/code-design/data-structure/linear-list#线性表抽象数据类型adt)使用C语言实现
+:::tip 总结
+
+1. 可随机获取某一个元素，<t c1>查询效率高</t>
+2. 插入或者删除时，需要移动大量元素，<t c1>修改效率低</t>
+3. 存储结构简单，无需存储额外信息，<t c2>空间利用率高</t>。
+4. 需要注意内存溢出风险。
+:::
+
+## [线性表ADT](/notebook/docs/computer/code-design/data-structure/linear-list#线性表抽象数据类型adt) 顺序存储实现
 
 公用宏定义
 
@@ -385,13 +393,13 @@ Status ListInsert(SqList* L, int i, ElemType e) {
 ![5-6](./images/5-6.webp)
 
 - 删除时需要先处理将要移除的元素。移动后会丢失对应数据。
-- 删除时,从移除位置开始，<t bg1>从左到右依次，向前移动</t>
+- 删除时,从移除位置开始，<t bg1>往前移动一个位置</t>
 - 时间复杂度为 $O(n)$
 
 ```c
 // 核心代码
 // deletePos 删除位置
-for (int i = deletePos; i < insertPos - 1; i--) {
+for (int i = deletePos; i < L.length - 1; i--) {
   L.list[i-1] = L.list[i];
 }
 ```
@@ -460,7 +468,7 @@ Status ListTraverse(SqList L, void(Visit)(ElemTYpe)) {
 }
 ```
 
-## 顺序表实际使用
+## 顺序表实际应用
 
 ### 求2个集合的并集
 
