@@ -6,10 +6,10 @@ const resolveMmData = (mm: any) => {
   const flatData = [];
 
   const travel = (data, parents = []) => {
-    const key = data.state.key || '';
+    const id = data.state.id || '';
     if (data.children) {
       data.children.forEach((item) => {
-        travel(item, [...parents, key]);
+        travel(item, [...parents, id]);
       });
       return;
     }
@@ -17,7 +17,7 @@ const resolveMmData = (mm: any) => {
     flatData.push({
       parents,
       content: data.content || '',
-      key: data.state.key || '',
+      id: data.state.id || '',
     });
   };
 
@@ -34,7 +34,7 @@ const toolActions = {
     const { minX, maxX, minY, maxY } = mm.state;
     const naturalWidth = maxY - minY;
     const naturalHeight = maxX - minX;
-    const scale = 1.25;
+    const scale = 1.2;
     const initialZoom = d3.zoomIdentity
       .translate(
         (offsetWidth - naturalWidth * scale) / 2 - minY * scale,
@@ -73,57 +73,26 @@ const toolActions = {
       mm.renderData();
     }
   },
-  centerNode: (mm, y, x) => {
+  centerNode: (mm, x0, y0) => {
     const svgNode = mm.svg.node();
     const { width: offsetWidth, height: offsetHeight } =
       svgNode.getBoundingClientRect();
-    const { minX, maxX, minY, maxY } = mm.state;
-    const naturalWidth = maxY - minY;
-    const naturalHeight = maxX - minX;
-    const scale = 1.25;
-    const leftTopDot = {
-      x: (offsetWidth - naturalWidth * scale) / 2 - minY * scale,
-      y: (offsetHeight - naturalHeight * scale) / 2 - minX * scale,
-    };
-    const halfX = (offsetWidth / 2) * scale;
-    const halfY = (offsetHeight / 2) * scale;
+    const scale = 1.2;
+    let x = -x0 * scale + offsetWidth / 2;
+    let y = -y0 * scale + offsetHeight / 2;
 
-    const centerDot = {
-      x: halfX + leftTopDot.x,
-      y: halfY + leftTopDot.y,
-    };
-    const delta = {
-      x: x - centerDot.x,
-      y: y - centerDot.y,
-    };
-    const targetLeftTopDot = {
-      x: leftTopDot.x + delta.x,
-      y: leftTopDot.y + delta.y,
-    };
-
-    console.log('==>', {
-      leftTopDot,
-      target: {
-        x,
-        y,
-      },
-      centerDot,
-      delta,
-      targetLeftTopDot,
-    });
-
-    const initialZoom = d3.zoomIdentity
-      .translate(targetLeftTopDot.x, targetLeftTopDot.y)
-      .scale(scale);
-    return mm
-      .transition(mm.svg)
+    const initialZoom = d3.zoomIdentity.translate(x, y).scale(scale);
+    mm.svg
+      .transition()
+      .duration(300)
       .call(mm.zoom.transform, initialZoom)
       .end()
       .catch(noop);
   },
 };
 
-window.toolActions = toolActions;
+// window.toolActions = toolActions;
+// console.log('===>',d3)
 
 export default {
   resolveMmData,

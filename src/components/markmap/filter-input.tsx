@@ -8,10 +8,10 @@ import debounce from 'lodash/debounce';
 import isString from 'lodash/isString';
 import lowerCase from 'lodash/lowerCase';
 import isEmpty from 'lodash/isEmpty';
+import toLower from 'lodash/toLower';
 
 import FilterStep from './filter-step';
 import utils from './utils';
-
 import style from './index.module.less';
 
 const FilterInput = (props: any) => {
@@ -30,33 +30,33 @@ const FilterInput = (props: any) => {
     }
 
     flatData.forEach((item) => {
-      const { content, parents, key } = item;
+      const { content, parents, id } = item;
       const index = lowerCase(content).indexOf(lowerCase(filterText));
       if (index > -1) {
         const len = filterText.length;
         const matchContent = `${content.slice(
           0,
           index,
-        )}<span class="b bg-1">${content.slice(
+        )}<span id="mm-match-${id}" class="mm-match-text b bg-1">${content.slice(
           index,
           index + len,
         )}</span>${content.slice(index + len)}`;
-        parents.forEach((key) => {
-          if (!filteredMap[key]) {
-            filteredMap[key] = true;
+        parents.forEach((parentId) => {
+          if (!filteredMap[parentId]) {
+            filteredMap[parentId] = true;
           }
         });
-        filteredMap[key] = matchContent;
+        filteredMap[id] = matchContent;
       }
     });
 
     if (isEmpty(filteredMap)) {
-      setFilteredMap({});
+      setFilteredMap({ empty: true });
       return;
     }
 
     walkTree(state.data, (item, next) => {
-      const matchContent = filteredMap[item.state.key];
+      const matchContent = filteredMap[item.state.id];
       item.payload.rawFold = item.payload.fold;
 
       let fold = 0;
@@ -83,7 +83,6 @@ const FilterInput = (props: any) => {
     });
 
     mm.current.setData();
-
     setFilteredMap(filteredMap);
   };
 
@@ -94,12 +93,18 @@ const FilterInput = (props: any) => {
   const handleChange = (e) => {
     const { value = '' } = e.target;
     setText(value);
-    handleFilter(value);
   };
 
   const handleClear = () => {
     setText('');
     handleFilter('');
+    setFilteredMap({});
+  };
+
+  const handleKeyDown = (e) => {
+    if (toLower(e.code) === 'enter') {
+      handleFilter(text);
+    }
   };
 
   return (
@@ -108,9 +113,12 @@ const FilterInput = (props: any) => {
         placeholder="搜索..."
         className={style.filterInput}
         value={text}
+        onKeyDown={handleKeyDown}
         onChange={handleChange}
       />
-      <FilterStep filteredMap={filteredMap} onClear={handleClear} mm={mm} />
+      {!isEmpty(filteredMap) && (
+        <FilterStep filteredMap={filteredMap} onClear={handleClear} mm={mm} />
+      )}
     </div>
   );
 };
