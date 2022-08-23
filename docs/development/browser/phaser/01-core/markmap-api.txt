@@ -136,9 +136,9 @@
 
 ### Keyboard
 
-### Keyboard.Events
+#### Events
 
-### Keyboard.KeyCodes
+#### KeyCodes
 
 ### Mouse
 

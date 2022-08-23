@@ -7,7 +7,7 @@ import cls from 'classnames';
 import { Transformer } from 'markmap-lib';
 import * as markmap from 'markmap-view';
 
-import style from './markmap.module.less';
+import style from './index.module.less';
 import toolbar from './toolbar';
 import utils from './utils';
 import FilterInput from './filter-input';

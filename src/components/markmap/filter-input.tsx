@@ -12,7 +12,7 @@ import isEmpty from 'lodash/isEmpty';
 import FilterStep from './filter-step';
 import utils from './utils';
 
-import style from './markmap.module.less';
+import style from './index.module.less';
 
 const FilterInput = (props: any) => {
   const { mm } = props;
@@ -110,16 +110,7 @@ const FilterInput = (props: any) => {
         value={text}
         onChange={handleChange}
       />
-      <FilterStep filteredMap={filteredMap} mm={mm} />
-      {!!text && (
-        <>
-          <img
-            onClick={handleClear}
-            className={style.filterInputClose}
-            src="/notebook/images/icon-close.png"
-          />
-        </>
-      )}
+      <FilterStep filteredMap={filteredMap} onClear={handleClear} mm={mm} />
     </div>
   );
 };

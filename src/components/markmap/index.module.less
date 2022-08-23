@@ -39,23 +39,11 @@
   font-size: 14px;
   border-radius: 4px;
 }
-.filterInputClose {
-  position: absolute;
-  width: 20px;
-  height: 20px;
-  top: 6px;
-  right: 4px;
-  opacity: 0.2;
-  cursor: pointer;
-  &:hover {
-    opacity: 0.4;
-  }
-}
 
 .filterStep {
   position: absolute;
   top: 6px;
-  right: 24px;
+  right: 6px;
   font-size: 12px;
 }
 
@@ -67,16 +55,37 @@
   display: inline-flex;
   border-radius: 4px;
   overflow: hidden;
+
+  button {
+    display: inline-flex;
+    border: 0;
+    padding: 0;
+    [disabled] {
+      cursor: not-allowed;
+    }
+    &:not([disabled]) {
+      i {
+        cursor: pointer;
+        &:hover {
+          background-color: var(--ifm-color-emphasis-400);
+        }
+      }
+    }
+  }
+
   i {
+    font-style: normal;
     width: 20px;
     height: 20px;
     display: flex;
     justify-content: center;
     align-items: center;
     background-color: var(--ifm-color-emphasis-200);
-    cursor: pointer;
-    &:hover {
-      background-color: var(--ifm-color-emphasis-400);
+    &[data-key='close'] {
+      cursor: pointer;
+      &:hover {
+        background-color: var(--ifm-color-emphasis-400);
+      }
     }
   }
 }

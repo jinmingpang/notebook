@@ -1,10 +1,12 @@
 import { Toolbar } from 'markmap-toolbar';
 import utils from './utils';
-import style from './markmap.module.less';
+import style from './index.module.less';
 
 import 'markmap-toolbar/dist/style.css';
 
 const addToolbar = ($wrap, mm: any) => {
+  console.log('====>mm', mm);
+  window.mm = mm;
   const toolbar = new Toolbar();
   // console.log('==>mm', mm);
   toolbar.setBrand(false);
