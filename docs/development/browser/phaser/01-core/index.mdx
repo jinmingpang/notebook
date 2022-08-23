@@ -1,4 +1,7 @@
-import apiMd from '!!raw-loader!./markmap-api.txt'
+import nmMd from '!!raw-loader!./phaser-nm.txt'
+import classMd from '!!raw-loader!./phaser-class.txt'
+import eventMd from '!!raw-loader!./phaser-event.txt'
+import mmHelper from './mm-helper'
 
 # 核心模块
 
@@ -7,6 +10,27 @@ import apiMd from '!!raw-loader!./markmap-api.txt'
 - [phaser 官网](https://phaser.io/)
 - [phaser api 文档](https://newdocs.phaser.io/docs/3.55.2/namespaces)
 
-## 整体思维导图
+## Namespaces 命名空间
 
-<markmap md={apiMd} bg height={700} />
+<markmap
+  md={nmMd}
+  bg height={700}
+  onResolveData={mmHelper.onResolveNmMmData}
+  css={mmHelper.mmCss}
+/>
+
+## Classes 实体类
+
+<markmap
+  md={classMd}
+  bg height={700}
+  css={mmHelper.mmCss}
+/>
+
+## Events 事件通知
+
+<markmap
+  md={eventMd}
+  bg height={700}
+  css={mmHelper.mmCss}
+/>

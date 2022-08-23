@@ -1,8 +1,8 @@
 import * as d3 from 'd3';
+import lowerCase from 'lodash/lowerCase';
 import { noop, walkTree } from 'markmap-common';
 
-const resolveMmData = (mm: any) => {
-  const { data } = mm.state;
+const getFlatData = (root) => {
   const flatData = [];
 
   const travel = (data, parents = []) => {
@@ -17,13 +17,13 @@ const resolveMmData = (mm: any) => {
     flatData.push({
       parents,
       content: data.content || '',
-      id: data.state.id || '',
+      id,
     });
   };
 
-  travel(data);
+  travel(root);
 
-  mm.flatData = flatData;
+  return flatData;
 };
 
 const toolActions = {
@@ -91,10 +91,37 @@ const toolActions = {
   },
 };
 
+const getFilterMap = (filterText, flatData) => {
+  const filteredMap = {};
+  const uglyTpl = '<]_!->';
+  flatData.forEach((item) => {
+    const { content, parents, id } = item;
+    const blankStr = content.replace(/<[^>]*>?/gm, uglyTpl);
+
+    const index = lowerCase(blankStr).indexOf(lowerCase(filterText));
+
+    if (index > -1) {
+      const reg = new RegExp(`(\>[^\>\<]*)(${filterText})([^\>\<]*\<)`, 'im');
+      const replaceTpl = `$1<span id="mm-match-${id}" class="mm-match-text b bg-1">$2</span>$3`;
+      let matchContent = `${uglyTpl}${content}${uglyTpl}`
+        .replace(reg, replaceTpl)
+        .replaceAll(uglyTpl, '');
+      parents.forEach((parentId) => {
+        if (!filteredMap[parentId]) {
+          filteredMap[parentId] = true;
+        }
+      });
+      filteredMap[id] = matchContent;
+    }
+  });
+  return filteredMap;
+};
+
 // window.toolActions = toolActions;
 // console.log('===>',d3)
 
 export default {
-  resolveMmData,
+  getFlatData,
+  getFilterMap,
   toolActions,
 };

@@ -42,7 +42,7 @@ const FilterAction = (props: any) => {
     }
     setCurr(1);
     if (mm.current) {
-      timeoutRef.timer.run(600, () => {
+      timeoutRef.timer.run(450, () => {
         debounceCenterNode(matchItems[0]);
       });
     }
@@ -87,7 +87,7 @@ const FilterAction = (props: any) => {
       nextCurr = prev < 1 ? allCount : prev;
     } else {
       const next = curr + 1;
-      nextCurr = next > allCount + 1 ? 1 : next;
+      nextCurr = next > allCount ? 1 : next;
     }
     setCurr(nextCurr);
     debounceCenterNode(matchItems[nextCurr - 1]);
