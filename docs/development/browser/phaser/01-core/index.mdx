@@ -13,8 +13,10 @@ import mmHelper from './mm-helper'
 ## Namespaces 命名空间
 
 <markmap
+  bg
   md={nmMd}
-  bg height={700}
+  initialLevel={1}
+  height={850}
   onResolveData={mmHelper.onResolveNmMmData}
   css={mmHelper.mmCss}
 />
@@ -22,15 +24,19 @@ import mmHelper from './mm-helper'
 ## Classes 实体类
 
 <markmap
+  bg
+  initialLevel={1}
   md={classMd}
-  bg height={700}
+  height={750}
   css={mmHelper.mmCss}
 />
 
 ## Events 事件通知
 
 <markmap
+  bg
+  initialLevel={1}
   md={eventMd}
-  bg height={700}
+  height={650}
   css={mmHelper.mmCss}
 />

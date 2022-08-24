@@ -4,13 +4,13 @@
 
 ## Animations
 
-### Events
+
 
 ## BlendModes
 
 ## Cache
 
-### Events
+
 
 ## Cameras
 
@@ -20,11 +20,11 @@
 
 #### Effects
 
-#### Events
+
 
 ## Core
 
-### Events
+
 
 ## Create
 
@@ -36,7 +36,7 @@
 
 ## Data
 
-### Events
+
 
 ## Device
 
@@ -64,7 +64,7 @@
 
 ### Masks
 
-## Events
+
 
 ## GameObjects
 
@@ -108,7 +108,7 @@
 
 #### Visible
 
-### Events
+
 
 ### Particles
 
@@ -124,19 +124,19 @@
 
 ## Input
 
-### Events
+
 
 ### Gamepad
 
 #### Configs
 
-#### Events
+
 
 ### InputPluginCache
 
 ### Keyboard
 
-#### Events
+
 
 #### KeyCodes
 
@@ -146,7 +146,7 @@
 
 ## Loader
 
-### Events
+
 
 ### FileTypes
 
@@ -222,7 +222,7 @@
 
 ##### Velocity
 
-#### Events
+
 
 #### Tilemap
 
@@ -254,7 +254,7 @@
 
 ##### Velocity
 
-#### Events
+
 
 #### Matter
 
@@ -272,7 +272,7 @@
 
 ### Canvas
 
-### Events
+
 
 ### Snapshot
 
@@ -280,7 +280,7 @@
 
 #### Pipelines
 
-##### Events
+
 
 #### Utils
 
@@ -288,7 +288,7 @@
 
 ### Center
 
-### Events
+
 
 ### Orientation
 
@@ -300,21 +300,21 @@
 
 ## Scenes
 
-### Events
+
 
 ### Settings
 
 ## Sound
 
-### Events
+
 
 ## Structs
 
-### Events
+
 
 ## Textures
 
-### Events
+
 
 ### FilterMode
 
@@ -340,7 +340,21 @@
 
 ### Builders
 
-### Events
+
+
+
+
+## Utils
+
+### Array
+
+#### Matrix
+
+### Base64
+
+### Objects
+
+### String
 
 ## Types
 
@@ -423,15 +437,3 @@
 ### Time
 
 ### Tweens
-
-## Utils
-
-### Array
-
-#### Matrix
-
-### Base64
-
-### Objects
-
-### String

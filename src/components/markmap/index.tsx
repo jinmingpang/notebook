@@ -17,15 +17,22 @@ const { Markmap, loadCSS, loadJS } = markmap;
 function MarkMap(props: any) {
   const {
     md = '',
+    readOnly = false,
     height = '300px',
     bg = false,
     onResolveData,
+    initialLevel = -1,
     onInit,
     css = '',
   } = props;
+
   const $wrap = useRef<any>();
   const $svg = useRef<any>();
   const mm = useRef<any>({});
+
+  const svgStyle = {
+    height,
+  };
 
   const load = () => {
     const transformer = new Transformer();
@@ -44,10 +51,20 @@ function MarkMap(props: any) {
     }
 
     // console.log('==>root', root);
-    mm.current = Markmap.create($svg.current, {}, root);
+    mm.current = Markmap.create(
+      $svg.current,
+      {
+        initialExpandLevel: initialLevel,
+      },
+      root,
+    );
+
     mm.current.flatData = utils.getFlatData(root);
 
-    toolbar.addToolbar($wrap, mm.current);
+    if (!readOnly) {
+      toolbar.addToolbar($wrap, mm.current);
+    }
+
     if (onInit) {
       onInit(mm.current);
     }
@@ -63,11 +80,14 @@ function MarkMap(props: any) {
   return (
     <div
       ref={$wrap}
-      className={cls(style.container, { [style.containerBg]: bg })}
+      className={cls(style.container, {
+        [style.containerBg]: bg,
+        [style.readOnly]: readOnly,
+      })}
     >
       {css && <style>{css}</style>}
-      <FilterInput mm={mm} />
-      <svg ref={$svg} style={{ height }} />
+      {!readOnly && <FilterInput mm={mm} />}
+      <svg ref={$svg} style={svgStyle} />
     </div>
   );
 }

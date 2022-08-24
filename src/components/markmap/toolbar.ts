@@ -3,17 +3,18 @@ import utils from './utils';
 import style from './index.module.less';
 
 import 'markmap-toolbar/dist/style.css';
+import { walkTree } from 'markmap-common';
 
 const addToolbar = ($wrap, mm: any) => {
-  console.log('====>mm', mm);
-  window.mm = mm;
+  // console.log('====>mm', mm);
+  // window.mm = mm;
   const toolbar = new Toolbar();
   // console.log('==>mm', mm);
   toolbar.setBrand(false);
   toolbar.setItems([
     'allClose',
     'allOpen',
-    'recurse',
+    // 'recurse',
     'zoomNormal',
     'fit',
     'zoomIn',
@@ -22,7 +23,7 @@ const addToolbar = ($wrap, mm: any) => {
   toolbar.attach(mm);
   toolbar.register({
     id: 'zoomNormal',
-    title: 'Zoom out',
+    title: 'Zoom font normal',
     content: Toolbar.icon(
       'M182.032,167.936v1.571219h-4.141567v8.428781h-1.716867v-8.428781h-4.141567v-1.571219h10Z',
       { transform: 'translate(-167.032-162.936)' },
@@ -59,9 +60,30 @@ const addToolbar = ($wrap, mm: any) => {
       utils.toolActions.allOpen(mm);
     },
   });
+
+  reDefineClick(mm);
   const $toolbar: any = toolbar.render();
   $toolbar.classList.add(style.toolbar);
   $wrap.current.append($toolbar);
+};
+
+const reDefineClick = (mm) => {
+  const originalClick = mm.handleClick;
+  if (!originalClick) {
+    return;
+  }
+  const handleClick = (_, d) => {
+    const fold = d.data.payload?.fold ? 0 : 1;
+    walkTree(d.data, (item, next) => {
+      item.payload = {
+        ...item.payload,
+        fold,
+      };
+      next();
+    });
+    mm.renderData(d.data);
+  };
+  mm.handleClick = handleClick;
 };
 
 export default {

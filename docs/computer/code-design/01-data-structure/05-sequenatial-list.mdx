@@ -1,6 +1,6 @@
 # 线性表-顺序存储
 
-线性表的使用[顺序存储](/notebook/docs/computer/code-design/data-structure/data-basic#顺序存储结构)实现又叫<t c1>顺序表</t>。本节的代码内容是非常简单的，除了掌握代码实现以外，还需要了解C语言指针，内存分配与释放，以及内存如何扩容等知识。
+线性表的使用[顺序存储](/notebook/docs/computer/code-design/data-structure/data-basic#顺序存储结构)实现，一般称为<t c1>顺序表</t>。本节的代码内容是非常简单的，除了掌握代码实现以外，还需要了解C语言指针，内存分配与释放，以及内存如何扩容等知识。
 
 ## 参考资料链接
 
@@ -208,7 +208,8 @@ int ListLength(L) {
 
 ```c
 /**
- * 初始条件: 线性表L已存在，l <= i <= ListLength(L) 操作结果; 用e返回L中第i个数据元素的值。
+ * 初始条件: 线性表L已存在，l <= i <= ListLength(L)
+ * 操作结果; 用e返回L中第i个数据元素的值。
  */
 Status GetElem(L, i, ElementType* e) {
   // 确认 i 的值有效
@@ -468,7 +469,7 @@ Status ListTraverse(SqList L, void(Visit)(ElemTYpe)) {
 }
 ```
 
-## 顺序表实际应用
+## 顺序表应用例子
 
 ### 求2个集合的并集
 

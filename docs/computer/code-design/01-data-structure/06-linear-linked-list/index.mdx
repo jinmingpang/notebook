@@ -1,0 +1,144 @@
+# 线性表-链式存储
+
+线性表的使用[链式存储](/notebook/docs/computer/code-design/data-structure/data-basic#链式存储结构)实现,一般称为<t c1>链表</t>。链表是进阶学习其他结构的核心基础，必须要掌握清楚。
+
+## 参考资料链接
+
+- [C语言 指针基础](http://c.biancheng.net/c/80/)
+- [5分钟看懂什么是 malloc](https://zhuanlan.zhihu.com/p/105090421)
+- [C语言 malloc函数与指针](https://zhuanlan.zhihu.com/p/197918331)
+
+## 知识点
+
+- 数据元素<t bg1>逻辑相邻物理存储不一定相邻</t>。又称为非顺序存储。
+- 由于存储位置不相邻，不能像顺序存储一样，使用位置来表示逻辑相邻关系。因此每一个节点中，需要添加额外数据（指向逻辑相邻元素的地址），来表示逻辑相邻。所以一个数据元素，分为两部分。<t c2>数据域</t>、<t c2>指针域</t>。
+<img src={require('../images/6-1.png').default} width="400" />
+
+- 通常，我们把链表画成箭头相连的节点序列。箭头表示指向某节点的指针。如下图所示：
+<img src={require('../images/6-2.webp').default} width="800" />
+
+- 整个链表的存储从<t b bg1>头指针</t>开始（指向链表第一个节点的指针）。
+- 由于链表中最后一个节点无直接后续，因此最后一个节点的指针为"空"<t c2>NULL</t>。
+<img src={require('../images/6-3.webp').default} width="600" />
+
+- 在链表第一个节点之前添加一个节点，叫<t b bg1>头节点</t>。<t fS cG>(注意头节点与头指针的区别)</t>
+  - 头节点的数据域可以放入一些表长度等信息，也可以不放任何信息。
+  - <t c2>头节点的指针，指向链表中第一个节点。</t><t fS cG>（头节点的指针叫"头指针"）</t>
+  - 注意：<t c3>头节点不是链表的第一个节点！</t>
+- 链表为空条件是：<t b c1>头指针为NULL</t>
+- 单链表中，取得第i个元素，必须从头指针出发寻找。因此<t c2>单链表是非随机存取的存储结构</t>。
+- 使用链表时，更加关注元素在表中的逻辑顺序，而不是元素在存储器中的实际位置。
+
+:::tip 总结
+
+1. 插入或者删除时，只需要改动指针即可，<t c1>修改效率高</t>。
+2. 无法随机获取某一个元素，<t c1>查询效率低</t>
+3. 除节点数据外，还需存储额外指针信息，<t c2>空间利用率低</t>。
+:::
+
+## 链表表的基本分类
+
+一般情况下，没有明确标明的情况下，都是指的是单链表。在实际应用中，链表有多种变体。每一种类型的链表都是在单链表的基础上，进行了改动。但总体上来说，都是线性表的链式结构。需要在不同情况下，选择的合适的链表。链表有如下分类。
+
+<markmap
+  bg
+  readOnly
+  height="240px"
+  md={`- 链表分类
+    - 按是否有头节点
+      - 带头链表
+      - 无头链表
+    - 按是否有指向前驱节点
+      - 单向链表
+      - 双向链表
+    - 按是否循环
+      - 循环链表
+      - 非循环链表
+    - 是否是使用数组描述“指针”
+      - 数组型静态链表
+      - 指针型动态链表`}
+/>
+
+## 单链表ADT
+
+在链表中数据元素之间的关系使用指针来表示。因此在线性表中的“位序”概念已淡化。而被数据在线性表中的“位置”代替。所以，要根据链表的实际情况，重新定义线性表的基本操作。
+
+一个<t c3>带头节点</t>的线性表ADT定义如下:
+
+```txt
+ADT LinkedList {
+
+  数据对象:D = {a}
+  数据关系:R1 = {<a[i-1],a[i]>}
+
+  基本操作:
+    Status MakeNode(Link &p，ElemType e);
+      操作结果: 分配由p指向的值为e的结点，并返回OK;若分配失败，则返回ERROR
+    
+    void FreeNode(Link &p);
+      操作结果: 释放p所指结点
+    
+    Status InitList(LinkList &L);
+      操作结果: 构造一个空的线性链表L
+    
+    Status DestroyList(LinkList &L);
+      操作结果: 销毁线性链表L，L不再存在
+    
+    Status ClearList(LinkList &L);
+      操作结果: 将线性链表L重置为空表，并释放原链表的结点空间
+
+    Status InsFirst(Link h,  Link s);
+      操作结果: 已知h指向线性链表的头结点，将s所指结点插人在第一个结点之前
+
+    Status DelFirst(Link h, Link &q)
+      操作结果: 已知h指向线性链表的头结点，删除链表中的第一个结点并以q返回
+
+    Status Append ( LinkList &L,Link s);
+      操作结果: 将指针s所指(彼此以指针相链)的一串结点链接在线性链表L的最后一个结点之后，并改变链表L的尾指针指向新的尾结点
+
+    Status Remove (LinkList &L,Link &q);
+      操作结果: 删除线性链表L中的尾结点并以q返回，改变链表L的尾指针指向新的尾结点
+
+    Status InsBefore(LinkList &L, Link &p,Link s);
+      操作结果: 已知p指向线性链表L中的一个结点，将s所指结点插人在p所指结点之前 并修改指针p指向新插入的结点
+  
+    Status InsAfter(LinkList &L, Link &p, Link s);
+      操作结果: 已知p指向线性链表L中的一个结点，将s所指结点插人在p所指结点之后，并修改指针p指向新插入的结点
+
+    Status SetCurElem(Link &p,ElemType e);
+      操作结果: 已知p指向线性链表中的一个结点，用e更新p所指结点中数据元素的值
+  
+    ElemType GetCurElem(Link p):
+      操作结果: 已知p指向线性链表中的一个结点，返回p所指结点中数据元素的值
+    
+    Status ListEmpty(LinkList L):
+      操作结果: 若线性链表L为空表，则返回TRUE，否则返回FALSE
+    
+    int ListLength(LinkList L);
+      操作结果: 返回线性链表L中元素个数 
+    
+    Position GetHead(LinkList L);
+      操作结果: 返回线性链表L中头结点的位置
+    
+    Position GetLast(LinkList L);
+      操作结果: 返回线性链表L中最后一个结点的位置
+    
+    Position PriorPos(LinkList L, Link p);
+      操作结果: 已知p指向线性链表L中的一个结点，返回p所指结点的直接前驱的位置，若无前驱，则返回NULL
+    
+    Position NextPos(LinkList L, Link p);
+      操作结果: 已知p指向线性链表L中的一个结点，返回p所指结点的直接后继的位置，若无后继，则返回NULL
+
+    StatusLocatePos(LinkList L, int i, Link &p);
+      操作结果: 返回p指示线性链表L中第i个结点的位置并返回OK，i值不合法时返回ERROR
+
+    Position LocateElem(LinkList L,ElemType e, Status(compare)(ElemType,ElemType));
+      操作结果: 返回线性链表L中第1个与e满足函数compare()判定关系的元素的位置，若不存在这样的元素，则返回NULL
+
+    Status ListTraverse(LinkList L，Status(*visit)());
+      操作结果: 依次对L的每个元素调用函数visit()一旦visit()失败，则操作失败。
+```
+
+## 单链表C语言代码实现
+
+## 链表表应用例子
