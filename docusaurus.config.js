@@ -61,7 +61,7 @@ const config = {
       {
         hashed: true,
         language: ['zh'],
-        docsRouteBasePath: '/notebook',
+        docsRouteBasePath: '/',
         highlightSearchTermsOnTargetPage: true,
         explicitSearchResultPath: true,
       },

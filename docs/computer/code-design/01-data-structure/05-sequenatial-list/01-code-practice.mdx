@@ -1,0 +1,120 @@
+# 顺序表的应用
+
+## 求2个集合的并集
+
+**题目：** 两个线性表LA和LB分别表示两个集合A和B(即线性表中的数据元素即为集合中的成员)，合并为一个集合。
+
+$A = A \cup B$
+
+- 举例
+
+```txt
+输入数据：
+  A = (1,2,3,4);
+  B = (1,4,5,6);
+输出数据：
+  A = (1,2,3,4,5,6);
+```
+
+- 思路
+  - 扩大线性表 LA，将存在于线性表LB中而不存在于线性表LA中的数据元素插人到线性表LA中去。
+  - 从线性表 LB 中依次取得每个数据元素，并依值在线性表LA中进行查访，若不存在，则插人LA。
+  - 需要注意，<t c2>可以使用线性表ADT</t>来描述算法。（不考虑具体实现）
+- 时间复杂度分析
+  - 循环遍历 LB 中元素： $O(LenB)$
+    - 获取 LB 指定位置元素： $O(1)$
+    - 再<t c1>嵌套查找</t> Bi 是否在 LA 中存在: $O(LenA)$
+    - 每一次插入都在<t c2>LA的末尾插入</t>： $O(1)$
+  - 总复杂度：$\color{red} O(LenB \times LenA) \Longrightarrow O(n^2)$
+- 伪代码如下： [点击查看可运行代码](https://onecompiler.com/c/3ydmj74gs)
+
+```c
+// 比较函数
+Status Compare(ElemType a, ElemType b) {
+  if (a == b){
+    return TRUE;
+  }
+  return FALSE
+}
+
+// 合并函数
+Status Union(SqList* A, SqList B) {
+  // 遍历 Lb中每一个元素
+  for (int i = 1; i <= B.length; i++) { // O(n)
+    GetElem(B, i, bi) // O(1)
+    // 如果 B中元素不在A中存在
+    if (LocateElem(*A, bi, Compare) == 0) { // O(n)
+      // 将该元素插入A的末尾
+      ListInsert(A, (*A).length + 1, bi); // O(1)
+    }
+  }
+}
+```
+
+## 合并2个有序表
+
+**题目：** 已知线性表LA和LB中的数据元素按值非递减有序排列，现要求将LA和LB归并为一个新的线性表LC，且LC中的数据元素仍按值非递减有序排列。
+
+$C = A \& B$
+
+- 举例
+
+```txt
+输入数据：
+  A = (1,2,3,4);
+  B = (1,4,5,6);
+输出数据：
+  C = (1,1,2,3,4,4,5,6);
+```
+
+- 思路
+  - LC中的数据元素或是LA或LB中元素
+  - 只要先设LC为空表，然后将LA或LB中的元素逐个插人到LC中即可。
+  - 可设两个位置 i 和 j分别指向LA 和 LB中某个位置元素, k为LC的列表的位置。
+    - 循环取出对应列表元素， 比较 $A_i$ 与 $B_j$ 大小
+    - 当前 $$C_{k++} = \begin{cases} A_i, A_i <= B_j, i++ \\ B_j, A_i > B_j, j++ \end{cases}$$
+- 时间复杂度分析
+  - 循环遍历 LA,LB 长度较少的一个表： $O(min(LenA,lenB))$
+    - 每次获取 LA,LB 中元素： $O(1)$
+  - 继续遍历剩下的一个长度较长的表：$O(max(LenA,lenB) - min(LenA,lenB))$
+  - 每次插入都在 <t c2>LC的末尾插入</t>： $O(1)$
+  - 总复杂度：$\color{red} O(LenA + LenB) \Longrightarrow O(n)$
+
+- 伪代码如下： [点击查看可运行代码](https://onecompiler.com/c/3ye65fv4m)
+
+```c
+Status MergeList(SqList A, SqList B, SqList* C) {
+  int i = 1,j = 1,k = 1;
+  InitList(C);
+
+  // 当 La,Lb 都存在元素时， 取出ai,bj 将较大的元素插入Lc中
+  while(i <= A.length && j <= B.length) { // O(n)
+    GetElem(A, i, ai); // O(1)
+    GetElem(B, j, bj); // O(1)
+    if (ai <= bj) {
+      InsertList(C, k, ai); // O(1)
+      i += 1; // i位置后移，取 La 下一个位置的元素
+    } else {
+      InsertList(C, k, bj); // O(1)
+      j +=1 ; // j位置后移，取 Lc 下一个位置的元素
+    }
+    k += 1; // k位置后移，Lc下一个插入位置
+  }
+
+  // 假如 La 还有多余的元素未插入 Lc
+  while(i <= A.length) { // O(n)
+    GetElem(A, i, ai);
+    InsertList(C, k, ai);
+    i += 1;
+    k += 1;
+  }
+
+  // 假如 Lb 还有多余的元素未插入 Lc
+  while(j <= B.length) { // O(n)
+    GetElem(B, j, bj);
+    InsertList(C, k, bj);
+    j += 1;
+    k += 1;
+  }
+}
+```
