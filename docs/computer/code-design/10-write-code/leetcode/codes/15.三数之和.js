@@ -3,54 +3,78 @@
  * 思路错误，导致计算复杂，且无法满足答案
  * [15] 三数之和
  *
- */
+ * if (sum > target) {
+ *   左移动
+ * } else if (sum < target) {
+ *   右移动
+ * }
+ * 
+ * check()
+ * 
+ * 内缩：左移动，右移动
+ * 
+ * 
+ * 
 // @lc code=start
 /**
  * @param {number[]} nums
  * @return {number[][]}
  */
 var threeSum = function (nums) {
-  var nums = nums.sort((a, b) => a - b);
-  var size = nums.length;
+  var sN = nums.sort((a, b) => a - b);
+  var len = nums.length;
+  var target = 0;
   var results = [];
   // 取出 第一个数据,  固定第一个数，转化为求两数之和
-  for (var i = 0; i < size; i++) {
+  for (var first = 0; first < len; first++) {
     // 第一个数大于 0，后面都是递增正数，不可能相加为零了
-    if (nums[i] > 0) {
+    if (sN[first] > 0) {
       return results;
     }
+
     // 去重：如果此数已经选取过，跳过
-    if (i > 0 && nums[i] == nums[i - 1]) {
+    if (first > 0 && sN[first] == sN[first - 1]) {
+      continue;
+    }
+
+    // 如果  最小的三个数都超过 目标，退出
+    if (sN[first] + sN[first + 1] + sN[first + 2] > target) {
+      break;
+    }
+
+    // 如果 最大的三个数都小于 目标，进入下一个
+    if (sN[first] + sN[len - 1] + sN[len - 2] < target) {
       continue;
     }
 
     // 双指针在nums[i]后面的区间中寻找和为0-nums[i]的另外两个数
-    var left = i + 1;
-    var right = size - 1;
+    var left = first + 1;
+    var right = len - 1;
+    var twoSumTarget = target - sN[first];
     while (left < right) {
-      // 两数之和太大，右指针左移
-      if (nums[left] + nums[right] > -nums[i]) {
+      // 两数之和太大，右指针左移 (会跳过相同的值)
+      if (sN[left] + sN[right] > twoSumTarget) {
         right--;
         continue;
       }
 
-      // 两数之和太小，左指针右移
-      if (nums[left] + nums[right] < -nums[i]) {
+      // 两数之和太小，左指针右移 (会跳过相同值)
+      if (sN[left] + sN[right] < twoSumTarget) {
         left++;
         continue;
       }
 
       // 找到一个和为零的三元组，添加到结果中，左右指针内缩，继续寻找
-      results.push([nums[i], nums[left], nums[right]]);
-      left++;
-      right--;
+      results.push([sN[first], sN[left], sN[right]]);
+      left++; // 仅移动单个（不会剔除重复值）
+      right--; // 仅移动单个（不会剔除重复值）
 
       // 去重：第二个数和第三个数也不重复选取
       // 例如：[-4,1,1,1,2,3,3,3], i=0, left=1, right=5
-      while (left < right && nums[left] == nums[left - 1]) {
+      while (left < right && sN[left] == sN[left - 1]) {
         left++;
       }
-      while (left < right && nums[right] == nums[right + 1]) {
+      while (left < right && sN[right] == sN[right + 1]) {
         right--;
       }
     }
