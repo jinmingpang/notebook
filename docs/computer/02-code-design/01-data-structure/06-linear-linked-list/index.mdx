@@ -8,6 +8,7 @@
 - [5分钟看懂什么是 malloc](https://zhuanlan.zhihu.com/p/105090421)
 - [C语言 malloc函数与指针](https://zhuanlan.zhihu.com/p/197918331)
 - [单链表完整代码 0204_LinkList/main.c](https://60f2cac42d-share.lightly.teamcode.com)
+- [双向循环链表完整代码 0208_DuLinkList/main.c](https://60f2cac42d-share.lightly.teamcode.com)
 
 ## 知识点
 
@@ -99,7 +100,7 @@
   - <t c2>结构简单</t>，添加、删除时，仅维护一个指针即可。
   - 链接方向是单向的，每次对链表的访问，只能<t c2>从头开始</t>顺序读取。
 
-- 双向链表 [核心操作>](#双向链表)
+- 双向链表
 
   ```c
   typedef int ElemType; // 线性表中元素类型定义
@@ -118,14 +119,15 @@
 ### 是否循环
 
 按照是链表是否存在<t c2>循环结构</t>。链表可以循环链表，与非循环链表。非循环链表就是上述介绍的一般链接结构。这里仅主要说明循环链表的情况。循环链表根据是否是双向链表，分为单循环链表，与双向循环链表。
-![6-6](../images/6-6.png)
+
+<img src={require("../images/6-6.png").default} width="740" />
 
 - 非循环链表
   - 访问表中元素时，只能从两端进行依次查找。
 
 - 循环链表
   - 访问表中元素时，可以从任意一个元素开始查找。
-  - 单向循环链表 [核心操作>](#单向循环链表)
+  - 单向循环链表
     - 单链表的最后一结点的指针指向头结点。
   - 双向向循环链表 [核心操作>](#双向循环链表)
     - 双向链表的最后一结点next的指针指向头结点。
@@ -232,6 +234,8 @@ tail = s;
 
 ### 单链表
 
+<img src={require("../images/6-20.png").default} width="700" />
+
 - 创建（尾插法）
 
 将一个新的结点插入到单链表结尾。
@@ -269,7 +273,7 @@ Status Empty(LinkList L) {
 int Traverse(LinkList L) {
   ListList current = L->next; // 头节点
   while(current != NULL) {
-    // current -> data // 当结点数据
+    // Visit(p->data); // 当结点数据
     current = p->next;
   }
   return 0;
@@ -307,38 +311,74 @@ Status Delete(LinkList p) { // 参数p为，待删除结点前一个节点
 }
 ```
 
-### 单向循环链表
-
-- 创建
-
-- 判空
-
-- 遍历
-
-- 插入
-
-- 删除
-
-### 双链表
-
-- 创建
-
-- 判空
-
-- 遍历
-
-- 插入
-
-- 删除
-
 ### 双向循环链表
 
-- 创建
+<img src={require("../images/6-21.png").default} width="640" />
+
+- 创建（尾插法）
+
+```c
+// 核心代码
+Status Create_Tail(LinkList tail) { // 参数为 链表最后一个结点
+  LinkList s; // 待插入结点
+  s->prior = tail->prior;
+  tail->prior->next = s;
+  s->next = tail;
+  tail->prior = s;
+}
+```
 
 - 判空
 
+```c
+Status Empty(DuLinkList L) {
+  // 前驱指针，后继指针，都指向头节点
+  if(L != NULL && L->next == L && L->prior == L) {
+    return TRUE;
+  } else {
+    return FALSE;
+  }
+}
+```
+
 - 遍历
+
+```c
+Status Traverse(DuLinkList L) {
+  p = L->next;
+  while(p != L) { // 当前结点不等于 头节点
+      // Visit(p->data);
+      p = p->next;
+  }
+}
+```
 
 - 插入
 
+<img src={require("../images/6-19.png").default} width="640" />
+
+```c
+Status Insert(DuLinkList p) { // 参数p为，待插入结点后一个节点
+  LinkList s; // 待插入结点（此处省略结点生成步骤）
+  s->prior = p->prior;
+  p->prior->next = s;
+  s->next = p;
+  p->prior = s;
+
+  return 0;
+}
+```
+
 - 删除
+
+<img src={require("../images/6-18.png").default} width="640" />
+
+```c
+Status Delete(DuLinkList p) {  // 参数p为，待删除结点
+  // 移除p结点
+  p->prior->next = p->next;
+  p->next->prior = p->prior;
+  free(q); // 释放 已经删除结点的 空间
+  return 0;
+}
+```

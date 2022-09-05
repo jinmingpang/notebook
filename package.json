@@ -10,11 +10,11 @@
     "deploy": "docusaurus deploy",
     "clear": "docusaurus clear",
     "serve": "docusaurus serve",
-    "write-translations": "docusaurus write-translations",
-    "write-heading-ids": "docusaurus write-heading-ids",
+    "write:translations": "docusaurus write-translations",
+    "write:heading-ids": "docusaurus write-heading-ids",
     "typecheck": "tsc",
     "prettier": "prettier --write \"**/*.{js,jsx,tsx,ts,less,md,json}\"",
-    "cp-gh": "cp -rf ./build/. ../notes-gh-pages"
+    "cp:gh": "cp -rf ./build/. ../notes-gh-pages"
   },
   "gitHooks": {
     "pre-commit": "lint-staged"
