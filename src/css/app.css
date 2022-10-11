@@ -36,6 +36,9 @@
   --docusaurus-highlighted-code-line-bg: rgba(0, 0, 0, 0.3);
 }
 
+.d-none, .hide {
+  display: none;
+}
 
 .inline-block {
   display: inline-block;
