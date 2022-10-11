@@ -27,7 +27,8 @@
       "prettier --parser=typescript --write"
     ]
   },
-  "devDependencies": {    "@docusaurus/module-type-aliases": "^2.0.1",
+  "devDependencies": {
+    "@docusaurus/module-type-aliases": "^2.0.1",
     "@tsconfig/docusaurus": "^1.0.6",
     "@types/lodash": "^4.14.182",
     "dotenv": "^16.0.1",
@@ -38,7 +39,6 @@
     "rehype-katex": "5",
     "remark-math": "3",
     "typescript": "^4.7.4"
-
   },
   "dependencies": {
     "@docusaurus/core": "^2.0.1",
