@@ -19,5 +19,13 @@
     "MD033": false,
     "MD007": false
   },
-  "cSpell.ignoreWords": ["malloc", "markmap"]
+  "cSpell.ignoreWords": [
+    "malloc",
+    "markmap"
+  ],
+  "workbench.colorCustomizations": {
+    "activityBar.background": "#3E2829",
+    "titleBar.activeBackground": "#573739",
+    "titleBar.activeForeground": "#FCFAFA"
+  }
 }
